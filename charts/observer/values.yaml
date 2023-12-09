@@ -1,0 +1,55 @@
+# Default values for observer.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# Override the name of the chart (String)
+nameOverride: ""
+
+# Override the full name of the chart (String)
+fullnameOverride: ""
+
+# A list of secrets used to pull images (Array)
+imagePullSecrets: []
+
+observer:
+  # observer.image: The image for the observer container (String)
+  image: ghcr.io/orbservability/observer:main-1856d1b-1701815278
+
+pixie:
+  # pixie.image: The image for the pixie container (String)
+  image: ghcr.io/orbservability/pixie:656925de-dffdb3b
+  # pixie.resources: Resource requests and limits for pixie (Object)
+  resources: {}
+  # pixie.env: Environment variables for pixie (Array)
+  env: []
+  # pixie.scripts: Scripts to be mounted as volumes (Array of Objects)
+  # - name: (String)
+  #   file: (String)
+  #   resources: (Object)
+  scripts: []
+
+serviceAccount:
+  # serviceAccount.create: Whether a service account should be created (Boolean)
+  create: true
+  # serviceAccount.automount: Automatically mount a ServiceAccount's API credentials? (Boolean)
+  automount: true
+  # serviceAccount.annotations: Annotations to add to the service account (Object)
+  annotations: {}
+  # serviceAccount.name: The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template (String)
+  name: ""
+
+pod:
+  # pod.annotations: Annotations to add to the pod (Object)
+  annotations: {}
+  # pod.securityContext: Security context for the pod (Object)
+  securityContext: {}
+
+# Node labels for pod assignment (Object)
+nodeSelector: {}
+
+# Tolerations for pod assignment (Array)
+tolerations: []
+
+# Affinity for pod assignment (Object)
+affinity: {}

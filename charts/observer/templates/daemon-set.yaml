@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ include "observer.fullname" . }}
+  labels:
+    {{- include "observer.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "observer.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.pod.annotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "observer.labels" . | nindent 8 }}
+    spec:
+      serviceAccountName: {{ include "observer.serviceAccountName" . }}
+      {{- with .Values.pod.securityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: pixie
+          image: {{ .Values.pixie.image }}
+          env:
+            - name: PL_HOST_PATH
+              value: /host
+            {{- with .Values.pixie.env }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: sys-volume
+              mountPath: /sys
+            - name: root-volume
+              mountPath: /host
+          resources:
+            {{- toYaml .Values.pixie.resources | nindent 12 }}
+        {{- range .Values.pixie.scripts }}
+        - name: observer-{{ .name }}
+          image: {{ $.Values.observer.image }}
+          resources:
+            {{- toYaml .resources | nindent 12 }}
+          volumeMounts:
+            - name: {{ .name }}-volume
+              mountPath: /usr/src/app/config
+        {{- end }}
+      volumes:
+        - name: root-volume
+          hostPath:
+            path: /
+            type: Directory
+        - name: sys-volume
+          hostPath:
+            path: /sys
+            type: Directory
+        {{- range .Values.pixie.scripts }}
+        - name: {{ .name }}-volume
+          configMap:
+            name: pxl-{{ .name }}-cm
+        {{- end }}
+      nodeSelector:
+        {{- toYaml .Values.nodeSelector | nindent 8 }}
+      tolerations:
+        {{- toYaml .Values.tolerations | nindent 8 }}
+      affinity:
+        {{- toYaml .Values.affinity | nindent 8 }}
+      hostNetwork: true
+      priorityClassName: system-node-critical

@@ -1,0 +1,9 @@
+{{- range .Values.pixie.scripts }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pxl-{{ .name }}-cm
+data:
+  config.pxl: |-
+    {{- $.Files.Get .file | nindent 4 }}
+{{- end }}
