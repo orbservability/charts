@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  observer:
+  - apiVersion: v2
+    appVersion: 0.1.1
+    created: "2023-12-09T07:03:51.100568423Z"
+    description: A Helm chart for Kubernetes
+    digest: 96a269417db963ceb293f5cbc6806ebf6d45c4a7ea4e0141571289a3dd616439
+    name: observer
+    type: application
+    urls:
+    - https://github.com/orbservability/helm-charts/releases/download/observer-0.1.1/observer-0.1.1.tgz
+    version: 0.1.1
+generated: "2023-12-09T07:03:51.100578943Z"
