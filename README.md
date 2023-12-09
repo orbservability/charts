@@ -9,7 +9,7 @@ Official Helm charts for Orbservability.
 Add via traditional [chart repository](https://helm.sh/docs/topics/chart_repository/):
 
 ```shell
-helm repo add orbservability https://helm.orbservability.com
+helm repo add orbservability https://orbservability.github.io/helm-charts/
 helm repo update
 ```
 
