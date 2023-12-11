@@ -16,6 +16,8 @@ observer:
   image: ghcr.io/orbservability/observer:main-1856d1b-1701815278
 
 pixie:
+  # pixie.create: Whether a the pixie daemon should be deployed (Boolean)
+  create: true
   # pixie.image: The image for the pixie container (String)
   image: ghcr.io/orbservability/pixie:656925de-dffdb3b
   # pixie.resources: Resource requests and limits for pixie (Object)

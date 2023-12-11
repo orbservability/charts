@@ -27,6 +27,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
+        {{- if .Values.pixie.create }}
         - name: pixie
           image: {{ .Values.pixie.image }}
           env:
@@ -44,6 +45,7 @@ spec:
               mountPath: /host
           resources:
             {{- toYaml .Values.pixie.resources | nindent 12 }}
+        {{- end }}
         {{- range .Values.pixie.scripts }}
         - name: observer-{{ .name }}
           image: {{ $.Values.observer.image }}
