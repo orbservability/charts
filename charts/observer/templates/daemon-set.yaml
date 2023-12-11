@@ -43,14 +43,18 @@ spec:
               mountPath: /sys
             - name: root-volume
               mountPath: /host
+          {{- with .Values.pixie.resources }}
           resources:
-            {{- toYaml .Values.pixie.resources | nindent 12 }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
         {{- end }}
         {{- range .Values.pixie.scripts }}
         - name: observer-{{ .name }}
           image: {{ $.Values.observer.image }}
+          {{- with .resources }}
           resources:
-            {{- toYaml .resources | nindent 12 }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           volumeMounts:
             - name: {{ .name }}-volume
               mountPath: /usr/src/app/config
