@@ -5,6 +5,6 @@ kind: ConfigMap
 metadata:
   name: pxl-{{ .name }}-cm
 data:
-  config.pxl: |-
-    {{- $.Files.Get .file | nindent 4 }}
+  config.pxl: |
+    {{- .content | nindent 4 }}
 {{- end }}

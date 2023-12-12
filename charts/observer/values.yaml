@@ -26,7 +26,7 @@ pixie:
   env: []
   # pixie.scripts: Scripts to be mounted as volumes (Array of Objects)
   # - name: (String)
-  #   file: (String)
+  #   content: (multiline String) (the script itself)
   #   resources: (Object)
   scripts: []
 
