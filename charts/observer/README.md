@@ -16,6 +16,6 @@ Install via [OCI-based registry](https://helm.sh/docs/topics/registries/):
 
 ```shell
 helm registry login ghcr.io --username $GITHUB_ACTOR --password-stdin
-helm pull oci://ghcr.io/orbservability/observer
+helm pull oci://ghcr.io/orbservability/charts/observer
 helm install observer observer-[tag].tgz
 ```
