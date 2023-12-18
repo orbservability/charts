@@ -1,7 +1,5 @@
 # Orbservability Charts
 
-Official Helm charts for Orbservability.
-
 - [Observer](./charts/observer) (orbservability/observer)
 
 ## Usage
