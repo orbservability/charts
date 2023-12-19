@@ -2,6 +2,8 @@
 
 <!-- ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/orbservability/observer?label=latest) -->
 
+<https://github.com/orbservability/observer>
+
 ## Usage
 
 Install via traditional [chart repository](https://helm.sh/docs/topics/chart_repository/):
